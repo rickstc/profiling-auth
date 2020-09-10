@@ -1,0 +1,32 @@
+version: "3.8"
+services:
+  application:
+    build: .
+    environment:
+      DJANGO_SECRET_KEY: ${DJANGO_SECRET_KEY}
+      LOCAL_PG_DB: ${LOCAL_PG_DB}
+      LOCAL_DB_USERNAME: ${LOCAL_DB_USERNAME}
+      LOCAL_DB_PASSWORD: ${LOCAL_DB_PASSWORD}
+      PG_HOST: ${PG_HOST}
+    volumes: 
+      - ./profiling-authentication:/code
+    ports:
+      - "80:80"
+    depends_on:
+      - postgres
+
+
+  postgres:
+    image: mdillon/postgis
+    restart: on-failure
+    environment:
+      POSTGRES_DB: ${LOCAL_PG_DB}
+      POSTGRES_USER: ${LOCAL_DB_USERNAME}
+      POSTGRES_PASSWORD: ${LOCAL_DB_PASSWORD}
+    ports:
+      - "5432:5432"
+    volumes:
+      - pg_data:/var/lib/postgresql/data
+
+volumes:
+  pg_data:
