@@ -34,8 +34,16 @@
     <Compile Include="current\apps.py" />
     <Compile Include="current\migrations\__init__.py" />
     <Compile Include="current\models.py" />
+    <Compile Include="current\serializers.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="current\tests.py" />
-    <Compile Include="current\views.py" />
+    <Compile Include="current\urls.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="current\viewsets.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="current\__init__.py" />
     <Compile Include="manage.py" />
     <Compile Include="profiling_authentication\asgi.py">

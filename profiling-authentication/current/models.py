@@ -20,9 +20,9 @@ class Role(UUIDPKModel):
         return False
 
 class Profile(UUIDPKModel):
-    first_name = models.CharField(max_length=32, required=True)
-    roles = ManyToManyField(Role, related_name='roles')
-    permissions = ManyToManyField(Permission, related_name='profile_permissions')
+    first_name = models.CharField(max_length=32, blank=False)
+    roles = models.ManyToManyField(Role, related_name='roles')
+    permissions = models.ManyToManyField(Permission, related_name='profile_permissions')
 
     def has_permission(self, permission_slug):
         """ Checks the permission """
