@@ -18,6 +18,9 @@ class ModelMapper:
             "is_system": self.dg.generate_boolean()
         }
 
+    def return_proposed_permission(self):
+        return self.dg.generate_string(32)
+
     def return_current_role(self):
         """ Returns a 'current' role object dictionary """
         return {
@@ -44,6 +47,15 @@ class ModelMapper:
             for i in range(number_to_create):
                 if object_type == 'permissions':
                     objects.append(self.return_current_permission())
+                elif object_type == 'roles':
+                    objects.append(self.return_current_role())
+                elif object_type == 'profiles':
+                    objects.append(self.return_current_profile())
+        if self.application == 'proposed':
+            for i in range(number_to_create):
+                if object_type == 'permissions':
+                    objects.append(self.return_proposed_permission())
+                # We can return 'current' role and profile objects because they are functionally equivalent
                 elif object_type == 'roles':
                     objects.append(self.return_current_role())
                 elif object_type == 'profiles':
