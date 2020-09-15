@@ -4,6 +4,7 @@
     <Name>profiling-authentication</Name>
     <RootNamespace>profiling-authentication</RootNamespace>
     <InterpreterId>MSBuild|env|$(MSBuildProjectFullPath)</InterpreterId>
+    <TestFramework>Pytest</TestFramework>
   </PropertyGroup>
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -37,7 +38,6 @@
     <Compile Include="current\serializers.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="current\tests.py" />
     <Compile Include="current\urls.py">
       <SubType>Code</SubType>
     </Compile>
@@ -60,7 +60,6 @@
     <Compile Include="proposed\apps.py" />
     <Compile Include="proposed\migrations\__init__.py" />
     <Compile Include="proposed\models.py" />
-    <Compile Include="proposed\tests.py" />
     <Compile Include="proposed\views.py" />
     <Compile Include="proposed\__init__.py" />
   </ItemGroup>

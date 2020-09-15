@@ -11,7 +11,7 @@ class Role(UUIDPKModel):
     name = models.CharField(max_length=32, blank=False)
     description = models.CharField(max_length=128, blank=False)
     is_inheritable = models.BooleanField(blank=False, default=False)
-    permissions = models.ManyToManyField(Permission, related_name='role_permissions')
+    permissions = models.ManyToManyField(Permission, related_name='role_permissions', blank=True)
 
     def has_permission(self, permission_object):
         """ Checks to see if the permission object is in the role """
@@ -21,8 +21,8 @@ class Role(UUIDPKModel):
 
 class Profile(UUIDPKModel):
     first_name = models.CharField(max_length=32, blank=False)
-    roles = models.ManyToManyField(Role, related_name='roles')
-    permissions = models.ManyToManyField(Permission, related_name='profile_permissions')
+    roles = models.ManyToManyField(Role, related_name='roles', blank=True)
+    permissions = models.ManyToManyField(Permission, related_name='profile_permissions', blank=True)
 
     def has_permission(self, permission_slug):
         """ Checks the permission """
