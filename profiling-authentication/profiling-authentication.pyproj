@@ -60,7 +60,15 @@
     <Compile Include="proposed\apps.py" />
     <Compile Include="proposed\migrations\__init__.py" />
     <Compile Include="proposed\models.py" />
-    <Compile Include="proposed\views.py" />
+    <Compile Include="proposed\serializers.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="proposed\urls.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="proposed\viewsets.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="proposed\__init__.py" />
   </ItemGroup>
   <ItemGroup>

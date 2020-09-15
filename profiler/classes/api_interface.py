@@ -20,6 +20,8 @@ class APIInterface:
 
         if response.status_code == 400:
             print(f'Bad Request at {url}')
+            print(response.json())
+            print(data)
 
         if expected_status == 'any':
             if response.status_code == 200:
@@ -30,6 +32,7 @@ class APIInterface:
             print(f'Something went wrong with the {method} request to: {url}')
             print(response.status_code)
             print(response.json())
+            print(data)
             return False
 
         return response.json()
