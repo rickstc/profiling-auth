@@ -47,7 +47,9 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.cache.UpdateCacheMiddleware',
     'django.middleware.common.CommonMiddleware',
+    'django.middleware.cache.FetchFromCacheMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
@@ -127,3 +129,19 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
+
+# Configure Caching
+CACHES = {
+    "default": {
+        "BACKEND": "django_redis.cache.RedisCache",
+        "LOCATION": "redis://redis:6379/1",
+        "OPTIONS": {
+            "CLIENT_CLASS": "django_redis.client.DefaultClient"
+        },
+        "KEY_PREFIX": "rdcache"
+    }
+}
+
+CACHE_MIDDLEWARE_ALIAS = 'default'
+CACHE_MIDDLEWARE_SECONDS = 10
+CACHE_MIDDLEWARE_KEY_PREFIX = 'rdcmcache'
