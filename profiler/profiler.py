@@ -1,6 +1,7 @@
 import requests
 import classes
 import random
+import time
 
 def check_permissions(application_name, profiles, permissions, num_checks):
     api = classes.APIInterface(application_name)
@@ -56,6 +57,7 @@ def create_objects(application_name, number_to_create, object_type):
 
     for ob in mapper.return_n_objects(number_to_create, object_type):
         api.create_object(object_type, ob)
+    time.sleep(11)
     return api.get_objects(object_type)
 
 def cleanup(app):
@@ -82,7 +84,7 @@ def profile_application(
         num_permission_checks
     ):
 
-    #cleanup(application_name)
+    cleanup(application_name)
     print(f"*********** PROFILING {str.upper(application_name)} ***********")
     
     timer = classes.RequestTimer()
@@ -90,22 +92,26 @@ def profile_application(
 
     # Generate the objects used in the tests
     permissions, roles, profiles = setup_data(application_name, num_permissions, num_roles, num_profiles)
-    print(f'It took {timer.get_elapsed_time()} seconds to set up objects')
+    print(f'It took {timer.get_elapsed_time()} to set up objects')
+    time.sleep(11)
     timer.restart_timer()
 
     # Add permissions to roles
-    roles = setup_relations(application_name, roles, 'roles', permissions, 'permissions', permissions_per_role)
-    print(f'It took {timer.get_elapsed_time()} seconds to add {permissions_per_role} permissions to each role')
+    roles = setup_relations(application_name, roles, 'roles', permissions.copy(), 'permissions', permissions_per_role)
+    print(f'It took {timer.get_elapsed_time()} to add {permissions_per_role} permissions to each role')
+    time.sleep(11)
     timer.restart_timer()
 
     # Add roles to profiles
-    profiles = setup_relations(application_name, profiles, 'profiles', roles, 'roles', roles_per_profile)
-    print(f'It took {timer.get_elapsed_time()} seconds to add {roles_per_profile} roles to each profile')
+    profiles = setup_relations(application_name, profiles, 'profiles', roles.copy(), 'roles', roles_per_profile)
+    print(f'It took {timer.get_elapsed_time()} to add {roles_per_profile} roles to each profile')
+    time.sleep(11)
     timer.restart_timer()
 
     # Add permissions to profiles
-    profiles = setup_relations(application_name, profiles, 'profiles', permissions, 'permissions', permissions_per_profile)
-    print(f'It took {timer.get_elapsed_time()} seconds to add {permissions_per_profile} permissions to each profile')
+    profiles = setup_relations(application_name, profiles, 'profiles', permissions.copy(), 'permissions', permissions_per_profile)
+    print(f'It took {timer.get_elapsed_time()} to add {permissions_per_profile} permissions to each profile')
+    time.sleep(11)
     timer.restart_timer()
 
 
